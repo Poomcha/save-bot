@@ -1,0 +1,19 @@
+{
+  "name": "ctrl-s",
+  "version": "1.0.0",
+  "description": "ctrl-s bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "save",
+    "ctrl+s",
+    "bot"
+  ],
+  "author": "poomcha",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.5.0"
+  }
+}
