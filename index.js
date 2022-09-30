@@ -3,8 +3,8 @@ const path = require('path');
 
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
-const token = DISCORD_TOKEN;
-const guildId = GUILD_ID;
+const token = process.env.DISCORD_TOKEN;
+const guildId = process.env.GUILD_ID;
 
 // Create new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });

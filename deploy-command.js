@@ -5,9 +5,9 @@ const fs = require('fs');
 
 const { REST, Routes } = require('discord.js');
 
-const clientId = APP_ID;
-const guildId = GUILD_ID;
-const token = DISCORD_TOKEN;
+const clientId = process.env.APP_ID;
+const guildId = process.env.GUILD_ID;
+const token = process.env.DISCORD_TOKEN;
 
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
