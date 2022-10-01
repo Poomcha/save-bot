@@ -1,0 +1,4 @@
+name = "ctrl-s"
+main = "./index.js"
+compatibility_date = "2022-09-30"
+node_compat = true
