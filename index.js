@@ -1,6 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const keepAlive = require("./server");
+const fs = require('fs');
+const path = require('path');
+const keepAlive = require('./server');
+require('dotenv').config();
 
 const {
   Client,
@@ -8,7 +9,7 @@ const {
   GatewayIntentBits,
   REST,
   Routes,
-} = require("discord.js");
+} = require('discord.js');
 
 const token = process.env.TOKEN;
 const appId = process.env.APP_ID;
@@ -17,14 +18,14 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
 });
 
-const rest = new REST({ version: "10" }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 // Association des commandes du bot au client.
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, "commands");
+const commandsPath = path.join(__dirname, 'commands');
 const commandsFiles = fs
   .readdirSync(commandsPath)
-  .filter((f) => f.endsWith(".js"));
+  .filter((f) => f.endsWith('.js'));
 
 for (const file of commandsFiles) {
   const filePath = path.join(commandsPath, file);
@@ -33,14 +34,14 @@ for (const file of commandsFiles) {
 }
 
 // Réaction du bot à une intéraction.
-client.on("interactionCreate", async (interaction) => {
+client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const command = interaction.client.commands.get(interaction.commandName);
   const commandName = interaction.commandName;
 
-  if (commandName === "start") client.emit("alert", interaction);
-  else if (commandName === "stop") client.emit("sleep", interaction);
+  if (commandName === 'start') client.emit('alert', interaction);
+  else if (commandName === 'stop') client.emit('sleep', interaction);
 
   if (!command) return;
 
@@ -49,13 +50,13 @@ client.on("interactionCreate", async (interaction) => {
   } catch (error) {
     console.error(error);
     await interaction.reply({
-      content: "an error occurs while executing /" + interaction.commandName,
+      content: 'an error occurs while executing /' + interaction.commandName,
       ephemeral: true,
     });
   }
 });
 
-const { getRandom } = require("./utils.js");
+const { getRandom } = require('./utils.js');
 const intervalConfig = {
   interval: 1000 * 60 * 30,
   message: async (interaction) => {
@@ -63,7 +64,7 @@ const intervalConfig = {
     const guildMembers = await guild.members.fetch();
     const membersName = guildMembers
       .map((member) => member.user.username)
-      .filter((name) => name !== "ctrl+s");
+      .filter((name) => name !== 'ctrl+s');
     const luckyOne = membersName[getRandom(0, membersName.length)];
     try {
       return `@${luckyOne} sauvegarde motherfucker.`;
@@ -74,7 +75,7 @@ const intervalConfig = {
   },
 };
 // Réaction aux events 'alert' et 'sleep' déclenchés par les commandes d'intéractions.
-client.on("alert", async (interaction) => {
+client.on('alert', async (interaction) => {
   const alert = setInterval(
     async () =>
       client.channels
@@ -85,13 +86,13 @@ client.on("alert", async (interaction) => {
         .catch((err) => console.log(err)),
     intervalConfig.interval
   );
-  client.on("sleep", async () => {
+  client.on('sleep', async () => {
     clearInterval(alert);
   });
 });
 
 // Création dynamique des commandes à l'intégration du bot par un nouveau serveur.
-client.on("guildCreate", async () => {
+client.on('guildCreate', async () => {
   const guildIds = client.guilds.cache.map((guild) => guild.id);
   const commands = [];
   for (const file of commandsFiles) {
