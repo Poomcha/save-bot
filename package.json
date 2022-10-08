@@ -4,7 +4,8 @@
   "description": "ctrl-s bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "save",
@@ -15,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.5.0",
-    "events": "^3.3.0"
+    "events": "^3.3.0",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "dotenv": "^16.0.3"

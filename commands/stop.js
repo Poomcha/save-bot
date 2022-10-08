@@ -1,10 +1,12 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('stop')
-    .setDescription('stop the ctrl+s bot.'),
+    .setName("stop")
+    .setDescription("Stop ctrl-s"),
   async execute(interaction) {
-    interaction.reply('ctrl+s bot stopped!');
+    interaction.reply(
+      `${interaction.user.username} a stoppé ctrl-s.`
+    );
   },
 };
