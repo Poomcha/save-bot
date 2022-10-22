@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const keepAlive = require('./server');
 require('dotenv').config();
 
 const {
@@ -58,7 +57,7 @@ client.on('interactionCreate', async (interaction) => {
 
 const { getRandom } = require('./utils.js');
 const intervalConfig = {
-  interval: 1000 * 60 * 30,
+  interval: 1000 * 60 * 25,
   message: async (interaction) => {
     const guild = await client.guilds.fetch(interaction.guildId);
     const guildMembers = await guild.members.fetch();
@@ -112,5 +111,4 @@ client.on('guildCreate', async () => {
   });
 });
 
-keepAlive();
 client.login(token);
