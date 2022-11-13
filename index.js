@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const keepAlive = require('./server');
 require('dotenv').config();
 
 const {
@@ -112,5 +111,4 @@ client.on('guildCreate', async () => {
   });
 });
 
-keepAlive();
 client.login(token);
