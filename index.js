@@ -49,7 +49,7 @@ client.on('interactionCreate', async (interaction) => {
   } catch (error) {
     console.error(error);
     await interaction.reply({
-      content: 'an error occurs while executing /' + interaction.commandName,
+      content: '🤖 an error occurs while executing /' + interaction.commandName,
       ephemeral: true,
     });
   }
@@ -59,24 +59,28 @@ const { getRandom, parseTimingChoice } = require('./utils.js');
 const intervalConfig = {
   intervalDefault: 1000 * 60 * 30,
   message: async (interaction) => {
-    const guild = await client.guilds.fetch(interaction.guildId);
-    const guildMembers = await guild.members.fetch();
-    const membersName = guildMembers
-      .map((member) => member.user.username)
-      .filter((name) => name !== 'ctrl+s');
-    const luckyOne = membersName[getRandom(0, membersName.length)];
-    try {
-      return `@${luckyOne} sauvegarde motherfucker.`;
-    } catch (err) {
-      console.log(err);
-      return `@everyone save!`;
+    if (interaction?.options.getBoolean('random')) {
+      const guild = await client.guilds.fetch(interaction.guildId);
+      const guildMembers = await guild.members.fetch();
+      const membersName = guildMembers
+        .map((member) => member.user.username)
+        .filter((name) => name !== 'ctrl+s');
+      const luckyOne = membersName[getRandom(0, membersName.length)];
+      try {
+        return `🤖 @${luckyOne} save!`;
+      } catch (err) {
+        console.log(err);
+        return `🤖 @everyone save!`;
+      }
+    } else {
+      return `🤖 @everyone save!`;
     }
   },
 };
 // Réaction aux events 'alert' et 'sleep' déclenchés par les commandes d'intéractions.
 client.on('alert', async (interaction) => {
   const intervalChoice =
-    parseTimingChoice(interaction?.options.getString('timing')) ??
+    parseTimingChoice(interaction?.options.getString('interval')) ??
     intervalConfig.intervalDefault;
   const alert = setInterval(
     async () =>

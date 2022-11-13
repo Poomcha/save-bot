@@ -6,7 +6,7 @@ module.exports = {
     .setDescription("Stop ctrl-s"),
   async execute(interaction) {
     interaction.reply(
-      `${interaction.user.username} a stoppé ctrl-s.`
+      `🤖 ${interaction.user.username} stopped ctrl-s.`
     );
   },
 };
