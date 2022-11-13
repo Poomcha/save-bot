@@ -55,9 +55,9 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-const { getRandom } = require('./utils.js');
+const { getRandom, parseTimingChoice } = require('./utils.js');
 const intervalConfig = {
-  interval: 1000 * 60,
+  intervalDefault: 1000 * 60 * 30,
   message: async (interaction) => {
     const guild = await client.guilds.fetch(interaction.guildId);
     const guildMembers = await guild.members.fetch();
@@ -75,6 +75,9 @@ const intervalConfig = {
 };
 // Réaction aux events 'alert' et 'sleep' déclenchés par les commandes d'intéractions.
 client.on('alert', async (interaction) => {
+  const intervalChoice =
+    parseTimingChoice(interaction?.options.getString('timing')) ??
+    intervalConfig.intervalDefault;
   const alert = setInterval(
     async () =>
       client.channels
@@ -83,7 +86,7 @@ client.on('alert', async (interaction) => {
           channel.send(await intervalConfig.message(interaction))
         )
         .catch((err) => console.log(err)),
-    intervalConfig.interval
+    intervalChoice
   );
   client.on('sleep', async () => {
     clearInterval(alert);
