@@ -57,7 +57,7 @@ client.on('interactionCreate', async (interaction) => {
 
 const { getRandom } = require('./utils.js');
 const intervalConfig = {
-  interval: 1000 * 60 * 30,
+  interval: 1000 * 60,
   message: async (interaction) => {
     const guild = await client.guilds.fetch(interaction.guildId);
     const guildMembers = await guild.members.fetch();
