@@ -1,7 +1,7 @@
 # CTRL+S DISCORD BOT 
 ## __*fr*__
 ### __description__
-Un bot discord simple, développé avec Node.js et Discord.js, qui vous rappelle de sauvegarder toutes les 30 minutes en envoyant un message mentionnant un membre aléatoire de votre serveur dans le channel dans lequel il a été démarré.  
+Un bot discord simple, développé avec Node.js et Discord.js, qui vous rappelle de sauvegarder toutes les X minutes en envoyant un message mentionnant un membre aléatoire de votre serveur ou tout le monde dans le channel dans lequel il a été démarré.  
 ### __commandes__
 __*/start*__: démarre le bot.  
 __*/stop*__:  arrête le bot.
@@ -26,7 +26,7 @@ __*/stop*__:  arrête le bot.
 
 ## __*en*__
 ### __description__
-A simple discord bot, developed with Node.js and Discord.js, reminds you to save every 30 minutes by sending a message mentioning a random member from your server in the channel
+A simple discord bot, developed with Node.js and Discord.js, reminds you to save every X minutes by sending a message mentioning a random member from your server or everyone in the channel
 bot started.
 ### __commands__
 __/start__: start the bot.  
